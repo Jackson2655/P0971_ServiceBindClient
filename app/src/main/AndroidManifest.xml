@@ -23,5 +23,8 @@
         </activity>
 
     </application>
+    <queries>
+        <package android:name="com.example.p0972_servicebindserver"/>
+    </queries>
 
 </manifest>
