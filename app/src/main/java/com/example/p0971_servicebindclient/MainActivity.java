@@ -15,14 +15,19 @@ public class MainActivity extends Activity {
 
     boolean bound = false;
     ServiceConnection sConn;
-    Intent intent;
+    ComponentName component;
+
+    Intent explicitIntent;
 
     /** Called when the activity is first created. */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        intent = new Intent("com.example.p0972servicebindserver.MyService");
+        component = new ComponentName("com.example.p0972_servicebindserver", "com.example.p0972_servicebindserver.MyService");
+        explicitIntent = new Intent("com.example.p0972_servicebindserver.MyService");
+        explicitIntent.setComponent(component);
+
 
         sConn = new ServiceConnection() {
             public void onServiceConnected(ComponentName name, IBinder binder) {
@@ -38,15 +43,15 @@ public class MainActivity extends Activity {
     }
 
     public void onClickStart(View v) {
-        startService(intent);
+        startService(explicitIntent);
     }
 
     public void onClickStop(View v) {
-        stopService(intent);
+        stopService(explicitIntent);
     }
 
     public void onClickBind(View v) {
-        bindService(intent, sConn, BIND_AUTO_CREATE);
+        bindService(explicitIntent, sConn, BIND_AUTO_CREATE);
     }
 
     public void onClickUnBind(View v) {
